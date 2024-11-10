@@ -35,7 +35,7 @@ async def send_recommendation(message, context: CallbackContext) -> None:
         
         await message.reply_text(f"{item}", reply_markup=reply_markup)
     else:
-        await message.reply_text("Больше рекомендаций нет. Можете попробовать написать запрос по-другому.")
+        await message.reply_text("Больше рекомендаций нет. Можете попробовать написать запрос по-другому или на другую тему.")
 
 # Обработчик для кнопки "Далее"
 async def button(update: Update, context: CallbackContext) -> None:
