@@ -10,7 +10,5 @@ def get_recommendations(query):
         for name in names:
             info = get_info(name)
             recommendations.append(info)
-    
-        return "\n".join(recommendations)
-    
+
     return recommendations

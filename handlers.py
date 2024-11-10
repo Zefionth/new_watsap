@@ -14,6 +14,8 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
     recommendations = get_recommendations(query)
     
     if recommendations:
-        await update.message.reply_text(f"Вот несколько фильмов, которые могут вам понравиться:\n{recommendations}")
+        await update.message.reply_text(f"Вот несколько фильмов, которые могут вам понравиться:")
+        for item in recommendations:
+            await update.message.reply_text(f"\n{item}")
     else:
         await update.message.reply_text("Извините, я не смог найти подходящих фильмов. Попробуйте описать запрос по-другому.")
