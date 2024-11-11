@@ -7,7 +7,7 @@ client = OpenAI(
     base_url="https://api.proxyapi.ru/openai/v1",
 )
 
-def get_names(query, category):
+def get_names(query: str, category: str) -> dict:
     if category == 'movies':
         chat_completion = client.chat.completions.create(
             model="gpt-4o",

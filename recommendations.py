@@ -2,7 +2,7 @@ from openai_api import get_names
 from kinopoisk_api import get_info_movies
 from shikimoriapi import get_info_anime
 
-def get_recommendations(query, category):
+def get_recommendations(query: str, category: str) -> list:
 
     recommendations = []
 

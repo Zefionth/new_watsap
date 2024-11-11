@@ -3,7 +3,7 @@ from telegram.ext import CallbackContext
 from recommendations import get_recommendations
 
 # Функция для старта бота с выбором категорий "Поиск аниме" и "Поиск фильмов"
-async def start(update: Update, context: CallbackContext):
+async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [
             InlineKeyboardButton("Поиск аниме", callback_data='search_anime'),
@@ -17,7 +17,7 @@ async def start(update: Update, context: CallbackContext):
     )
 
 # Функция для обработки сообщений, после выбора категории
-async def handle_message(update: Update, context: CallbackContext):
+async def handle_message(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("Ваш запрос обрабатывается…")
     query = update.message.text  # Получаем текст запроса
 
@@ -35,7 +35,7 @@ async def handle_message(update: Update, context: CallbackContext):
         await update.message.reply_text("Извините, я не смог найти подходящие результаты. Попробуйте описать запрос по-другому. Для выбора другой категории напишите /start")
 
 # Функция для отправки текущей рекомендации
-async def send_recommendation(message, context: CallbackContext):
+async def send_recommendation(message, context: CallbackContext) -> None:
     current_index = context.user_data['current_index']
     recommendations = context.user_data['recommendations']
     
@@ -50,7 +50,7 @@ async def send_recommendation(message, context: CallbackContext):
         await message.reply_text("Больше рекомендаций нет. Можете попробовать написать запрос по-другому или на другую тему. Для выбора другой категории напишите /start")
 
 # Обработчик для кнопок выбора категории и кнопки "Далее"
-async def button(update: Update, context: CallbackContext):
+async def button(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     await query.answer()
 
