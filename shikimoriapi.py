@@ -16,7 +16,11 @@ def get_info_anime(name: str) -> str:
         released_year = 'онгоинг'
     rating = anime['score']
     imageUrl = anime['image']['original']
-    description = re.sub("[\(\[].*?[\)\]]", "", anime['description'])
+    description = anime['description']
+    if description == None:
+        description = 'Нет описания'
+    else:
+        description = re.sub("[\(\[].*?[\)\]]", "", anime['description'])
 
     if name:
         info.append(
