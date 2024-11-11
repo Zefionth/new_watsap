@@ -19,7 +19,7 @@ def get_info_anime(name: str) -> str:
 
     if name:
         info.append(
-            f"{name}({aired_year[:4]} - {released_year}\n"
+            f"{name}({aired_year} - {released_year})\n"
             f"⭐Рейтинг: {rating}\n"
             f"📄Описание: {description}\n"
             f"Постер: {imageUrl}\n"

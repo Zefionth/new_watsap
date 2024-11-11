@@ -17,6 +17,7 @@ def get_info_movies(name: str) -> str:
         film = films[0]
         name = film.get('nameRu')
         year = film.get('year', 'Неизвестно')
+        imageUrl = film.get('posterUrl')
         rating = film.get('rating') # Добавлено
         description = film.get('description', 'Отсутствует') # Добавлено
         if rating == 'null': # Добавлено
@@ -27,6 +28,7 @@ def get_info_movies(name: str) -> str:
                 f"{name}({year})\n"
                 f"⭐Рейтинг: {rating}\n"
                 f"📄Описание: {description}\n"
+                f"Постер: {imageUrl}\n"
             )
         return "\n".join(info)
     else:

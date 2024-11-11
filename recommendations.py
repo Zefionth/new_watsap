@@ -1,6 +1,6 @@
 from openai_api import get_names
 from kinopoisk_api import get_info_movies
-from shikimori_api import get_info_anime
+from shikimoriapi import get_info_anime
 
 def get_recommendations(query, category):
 
