@@ -22,7 +22,7 @@ def get_info_anime(name: str) -> str:
             f"{name}({aired_year} - {released_year})\n"
             f"⭐Рейтинг: {rating}\n"
             f"📄Описание: {description}\n"
-            f"Постер: {imageUrl}\n"
+            f"Постер: https://shikimori.one/{imageUrl}\n"
         )
         return "\n".join(info)
     else:
