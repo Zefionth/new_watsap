@@ -1,4 +1,5 @@
 import shikimori_api
+import re
 
 def get_info_anime(name: str) -> str:
 
@@ -15,7 +16,7 @@ def get_info_anime(name: str) -> str:
         released_year = 'онгоинг'
     rating = anime['score']
     imageUrl = anime['image']['original']
-    description = anime['description']
+    description = re.sub("[\(\[].*?[\)\]]", "", anime['description'])
 
     if name:
         info.append(
