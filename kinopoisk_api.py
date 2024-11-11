@@ -1,7 +1,7 @@
 import requests
 from config import KINOPOISK_API_TOKEN
 
-def get_info(name: str) -> str:
+def get_info_movies(name: str) -> str:
     url = f"https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword={name}"
     headers = {
         'X-API-KEY': KINOPOISK_API_TOKEN

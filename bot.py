@@ -3,7 +3,7 @@ from handlers import start, handle_message, button
 from config import TELEGRAM_TOKEN
 
 # Основная функция для запуска бота
-def main() -> None:
+def main():
     application = Application.builder().token(TELEGRAM_TOKEN).build()
 
     # Обработчики
