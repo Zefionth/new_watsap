@@ -1,14 +1,22 @@
 from openai_api import get_names
-from kinopoisk_api import get_info
+from kinopoisk_api import get_info_movies
+from shikimoriapi import get_info_anime
 
-def get_recommendations(query):
+def get_recommendations(query: str, category: str) -> list:
 
     recommendations = []
 
-    names = get_names(query).values()
+    names = get_names(query, category).values()
     if names:
-        for name in names:
-            info = get_info(name)
-            recommendations.append(info)
+        if category == 'movies':
+            for name in names:
+                if name == None: continue
+                info = get_info_movies(name)
+                recommendations.append(info)
+        else:
+            for name in names:
+                if name == None: continue
+                info = get_info_anime(name)
+                recommendations.append(info)
 
     return recommendations
