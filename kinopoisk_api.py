@@ -19,7 +19,7 @@ def get_info_movies(name: str) -> str:
         year = film.get('year', 'Неизвестно')
         imageUrl = film.get('posterUrl')
         rating = film.get('rating')
-        description = film.get('description', 'Отсутствует') # Добавлено
+        description = film.get('description', 'Отсутствует')
         if rating == 'null':
             rating = 'Неизвестно'
 
