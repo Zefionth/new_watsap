@@ -1,5 +1,5 @@
 import shikimori_api
-import re
+from re import sub
 
 def get_info_anime(name: str) -> str:
 
@@ -20,14 +20,14 @@ def get_info_anime(name: str) -> str:
     if description == None:
         description = 'Нет описания'
     else:
-        description = re.sub("[\(\[].*?[\)\]]", "", anime['description'])
+        description = sub(r"[\(\[].*?[\)\]]", "", description)
 
     if name:
         info.append(
-            f"{name}({aired_year} - {released_year})\n"
+            f"{name}({aired_year.replace('-', '.')} - {released_year.replace('-', '.')})\n"
             f"⭐Рейтинг: {rating}\n"
             f"📄Описание: {description}\n"
-            f"Постер: https://shikimori.one/{imageUrl}\n"
+            f"🖼️Постер: https://shikimori.one/{imageUrl}\n"
         )
         return "\n".join(info)
     else:

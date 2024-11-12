@@ -28,7 +28,7 @@ def get_info_movies(name: str) -> str:
                 f"{name}({year})\n"
                 f"⭐Рейтинг: {rating}\n"
                 f"📄Описание: {description}\n"
-                f"Постер: {imageUrl}\n"
+                f"🖼️Постер: {imageUrl}\n"
             )
         return "\n".join(info)
     else:
