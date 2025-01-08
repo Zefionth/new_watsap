@@ -1,34 +1,49 @@
 import shikimori_api
 from re import sub
 
-def get_info_anime(name: str) -> str:
+def format_year(year):
+    """Форматирует год для отображения, заменяя '-' на '.' или возвращает 'онгоинг', если None."""
+    return year.replace('-', '.') if year else 'онгоинг'
 
+def clean_description(description):
+    """Удаляет ненужные символы из описания и возвращает сообщение по умолчанию, если None."""
+    return sub(r"[\(\[].*?[\)\]]", "", description) if description else 'Нет описания'
+
+def get_info_anime(name: str) -> str:
+    """Получает и форматирует информацию об аниме по его названию.
+
+    Аргументы:
+        name (str): Название аниме для поиска.
+
+    Возвращает:
+        str: Отформатированная строка с информацией об аниме или None, если не найдено.
+    """
+    # Создаем сессию с API Shikimori
     session = shikimori_api.Shikimori()
     api = session.get_api()
+    
+    # Ищем аниме по названию и получаем первый результат
     search_anime = api.animes.GET(search=name, kind='tv')[0]
+    
+    # Получаем подробную информацию об аниме по его ID
     anime = api.animes(search_anime['id']).GET()
 
-    info = []
+    # Извлекаем необходимые данные из информации об аниме
     name = anime['russian']
-    aired_year = anime['aired_on']
-    released_year = anime['released_on']
-    if released_year == None:
-        released_year = 'онгоинг'
+    aired_year = format_year(anime['aired_on'])
+    released_year = format_year(anime['released_on'])
     rating = anime['score']
     imageUrl = anime['image']['original']
-    description = anime['description']
-    if description == None:
-        description = 'Нет описания'
-    else:
-        description = sub(r"[\(\[].*?[\)\]]", "", description)
+    description = clean_description(anime['description'])
 
+    # Проверяем, доступно ли название аниме, и форматируем вывод
     if name:
-        info.append(
-            f"{name}({aired_year.replace('-', '.')} - {released_year.replace('-', '.')})\n"
+        return (
+            f"{name}({aired_year} - {released_year})\n"
             f"⭐Рейтинг: {rating}\n"
             f"📄Описание: {description}\n"
             f"🖼️Постер: https://shikimori.one/{imageUrl}\n"
         )
-        return "\n".join(info)
-    else:
-        return None
+    
+    # Возвращаем None, если название не найдено
+    return None

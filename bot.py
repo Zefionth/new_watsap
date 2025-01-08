@@ -4,14 +4,16 @@ from config import TELEGRAM_TOKEN
 
 # Основная функция для запуска бота
 def main() -> None:
+    """Запускает Telegram-бота."""
+    # Создаем экземпляр приложения с токеном бота
     application = Application.builder().token(TELEGRAM_TOKEN).build()
 
-    # Обработчики
-    application.add_handler(CommandHandler("start", start))  # Команда /start
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))  # Текстовые сообщения
-    application.add_handler(CallbackQueryHandler(button))  # Все нажатия на кнопки, включая "Next"
+    # Регистрация обработчиков команд и сообщений
+    application.add_handler(CommandHandler("start", start))  # Обработка команды /start
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))  # Обработка текстовых сообщений
+    application.add_handler(CallbackQueryHandler(button))  # Обработка нажатий на кнопки
 
-    # Запуск бота
+    # Запуск бота в режиме опроса (polling)
     application.run_polling()
 
 if __name__ == '__main__':
