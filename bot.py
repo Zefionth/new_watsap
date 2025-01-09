@@ -2,7 +2,6 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQu
 from handlers import start, handle_message, button
 from config import TELEGRAM_TOKEN
 
-# Основная функция для запуска бота
 def main() -> None:
     """Запускает Telegram-бота."""
     # Создаем экземпляр приложения с токеном бота

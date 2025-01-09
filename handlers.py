@@ -2,7 +2,6 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 from recommendations import get_recommendations
 
-# Функция для старта бота с выбором категорий "Поиск аниме" и "Поиск фильмов"
 async def start(update: Update, context: CallbackContext) -> None:
     """Отправляет приветственное сообщение с кнопками выбора категории."""
     keyboard = [
@@ -17,7 +16,6 @@ async def start(update: Update, context: CallbackContext) -> None:
         "Привет! Выберите категорию для поиска:", reply_markup=reply_markup
     )
 
-# Функция для обработки сообщений после выбора категории
 async def handle_message(update: Update, context: CallbackContext) -> None:
     """Обрабатывает текстовые сообщения пользователя и отправляет рекомендации."""
     await update.message.reply_text("Ваш запрос обрабатывается…")
@@ -31,7 +29,7 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
 
     if recommendations:
         context.user_data['recommendations'] = recommendations
-        context.user_data['current_index'] = 0  # Начальный индекс
+        context.user_data['current_index'] = 0 
         await send_recommendation(update.message, context)
     else:
         await update.message.reply_text(
@@ -39,7 +37,6 @@ async def handle_message(update: Update, context: CallbackContext) -> None:
             "Попробуйте описать запрос по-другому. Для выбора другой категории напишите /start"
         )
 
-# Функция для отправки текущей рекомендации
 async def send_recommendation(message, context: CallbackContext) -> None:
     """Отправляет текущую рекомендацию пользователю."""
     current_index = context.user_data['current_index']
@@ -59,7 +56,6 @@ async def send_recommendation(message, context: CallbackContext) -> None:
             "Для выбора другой категории напишите /start"
         )
 
-# Обработчик для кнопок выбора категории и кнопки "Далее"
 async def button(update: Update, context: CallbackContext) -> None:
     """Обрабатывает нажатия на кнопки выбора категории и кнопку 'Далее'."""
     query = update.callback_query
